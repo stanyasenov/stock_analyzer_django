@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Analysis Results</title>
+</head>
+<body>
+    <h1>Stock Analysis Results</h1>
+
+    <h2>Bitcoin (BTC-USD)</h2>
+    <h3>Model Performance</h3>
+    <ul>
+        {% for model_name, result in btc_results.items %}
+            <li>
+                <strong>{{ model_name }}:</strong>
+                <p>MSE: {{ result.mse }}</p>
+                <p>MAE: {{ result.mae }}</p>
+                <p>R²: {{ result.r2 }}</p>
+                <img src="{% static result.plot_url %}" alt="Model Prediction">
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Monthly Returns Heatmap</h3>
+    <img src="{% static btc_monthly_heatmap %}" alt="Bitcoin Monthly Heatmap">
+
+    <h2>S&P 500 (^GSPC)</h2>
+    <h3>Model Performance</h3>
+    <ul>
+        {% for model_name, result in sp500_results.items %}
+            <li>
+                <strong>{{ model_name }}:</strong>
+                <p>MSE: {{ result.mse }}</p>
+                <p>MAE: {{ result.mae }}</p>
+                <p>R²: {{ result.r2 }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Bitcoin Price Prediction Images</h3>
+    <img src="{% static btc_price_rf %}" alt="Random Forest Prediction">
+    <img src="{% static btc_price_lr %}" alt="Linear Regression Prediction">
+
+    <h3>S&P 500 Price Prediction</h3>
+    <img src="{% static sp500_price_lr %}" alt="S&P 500 Linear Regression Prediction">
+</body>
+</html>
